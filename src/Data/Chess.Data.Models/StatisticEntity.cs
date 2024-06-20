@@ -2,7 +2,7 @@
 {
     using Chess.Data.Common.Models;
 
-    public class StatisticEntity : BaseModel<int>, IHaveOwner
+    public class StatisticEntity : BaseModel<int>, IHaveOwner, IBlockEntity
     {
         public int Played { get; set; }
 

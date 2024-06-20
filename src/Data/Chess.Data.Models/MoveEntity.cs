@@ -2,7 +2,7 @@
 {
     using Chess.Data.Common.Models;
 
-    public class MoveEntity : BaseModel<int>, IHaveOwner
+    public class MoveEntity : BaseModel<int>, IHaveOwner, IBlockEntity
     {
         public string Notation { get; set; }
 

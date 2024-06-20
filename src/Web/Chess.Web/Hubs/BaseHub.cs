@@ -8,6 +8,9 @@
 
     using Chess.Common.Enums;
     using Chess.Data;
+    using Chess.Data.Common.Repositories;
+    using Chess.Data.Models;
+    using Chess.Data.Repositories;
     using Chess.Services.Data.Models;
     using Chess.Services.Data.Services.Contracts;
     using Microsoft.AspNetCore.SignalR;
@@ -62,7 +65,7 @@
                             var winner = game.MovingPlayer.Id != leavingPlayer.Id ? game.MovingPlayer : game.Opponent;
                             if (this.players.Keys.Contains(winner.Id))
                             {
-                                this.UpdateStats(winner, leavingPlayer, game, GameOver.Disconnected);
+                                await this.UpdateStats(winner, leavingPlayer, game, GameOver.Disconnected);
                             }
                         }
                     }
@@ -100,10 +103,11 @@
             return dbContext.Stats.Where(x => x.User.Id == player.UserId).Select(x => x.EloRating).FirstOrDefault();
         }
 
-        private void UpdateStats(Player sender, Player opponent, Game game, GameOver gameOver)
+        private async Task UpdateStats(Player sender, Player opponent, Game game, GameOver gameOver)
         {
             using var scope = this.serviceProvider.CreateScope();
             var dbContext = scope.ServiceProvider.GetRequiredService<ChessDbContext>();
+            var statsBlockchainRepository = scope.ServiceProvider.GetRequiredService<IBlockchainRepository<StatisticEntity>>();
 
             var senderStats = dbContext.Stats.Where(x => x.User.Id == sender.UserId).FirstOrDefault();
             var opponentStats = dbContext.Stats.Where(x => x.User.Id == opponent.UserId).FirstOrDefault();
@@ -129,6 +133,8 @@
 
             dbContext.Stats.Update(senderStats);
             dbContext.Stats.Update(opponentStats);
+            await statsBlockchainRepository.UpdateAsync(senderStats);
+            await statsBlockchainRepository.UpdateAsync(opponentStats);
             dbContext.SaveChanges();
         }
     }

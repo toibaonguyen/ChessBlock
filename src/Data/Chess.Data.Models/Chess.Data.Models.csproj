@@ -16,6 +16,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.6" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Services\Chess.Services.Mapping\Chess.Services.Mapping.csproj" />
     <ProjectReference Include="..\Chess.Data.Common\Chess.Data.Common.csproj" />
   </ItemGroup>
 </Project>

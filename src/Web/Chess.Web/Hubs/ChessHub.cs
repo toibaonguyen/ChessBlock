@@ -34,9 +34,11 @@
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.ToString());
+
                 using var scope = this.serviceProvider.CreateScope();
                 var errorLogRepository = scope.ServiceProvider.GetRequiredService<IRepository<ErrorLogEntity>>();
-
+                
                 await errorLogRepository.AddAsync(new ErrorLogEntity
                 {
                     GameId = game.Id,
@@ -63,7 +65,7 @@
                 .SendAsync("GameOver", player, game.GameOver);
             await this.GameSendInternalMessage(game.Id, player.Name, null);
 
-            this.UpdateStats(player, opponent, game, game.GameOver);
+            await this.UpdateStats(player, opponent, game, game.GameOver);
         }
 
         public async Task OfferDrawRequest()
@@ -88,7 +90,7 @@
                 await this.Clients.Group(game.Id).SendAsync("GameOver", null, game.GameOver);
                 await this.GameSendInternalMessage(game.Id, player.Name, game.GameOver.ToString());
 
-                this.UpdateStats(player, opponent, game, game.GameOver);
+                await this.UpdateStats(player, opponent, game, game.GameOver);
             }
             else
             {
@@ -107,7 +109,7 @@
             await this.Clients.Group(game.Id).SendAsync("GameOver", player, game.GameOver);
             await this.GameSendInternalMessage(game.Id, player.Name, null);
 
-            this.UpdateStats(opponent, player, game, game.GameOver);
+            await this.UpdateStats(opponent, player, game, game.GameOver);
         }
 
         private async Task OpponentBoardMove(string source, string target, Game game)
@@ -161,10 +163,9 @@
             var opponent = game.Opponent;
             var gameOver = e as GameOverEventArgs;
 
-            this.Clients.Group(game.Id).SendAsync("GameOver", player, gameOver.GameOver);
+            this.UpdateStats(player, opponent, game, gameOver.GameOver).RunSynchronously();
+            this.Clients.Group(game.Id).SendAsync("GameOver", player, gameOver.GameOver).RunSynchronously();
             _ = this.GameSendInternalMessage(game.Id, player.Name, gameOver.GameOver.ToString());
-
-            this.UpdateStats(player, opponent, game, gameOver.GameOver);
         }
 
         private void Game_OnCompleteMove(object sender, EventArgs e)

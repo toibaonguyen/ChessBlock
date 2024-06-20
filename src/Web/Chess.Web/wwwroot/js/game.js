@@ -48,7 +48,7 @@
         let span = document.createElement("span");
         let button = document.createElement("button");
 
-        span.innerText = `${player.name.toUpperCase()}'S ROOM`;
+        span.innerText = `${player.name.toUpperCase()}`;
         span.classList.add('game-lobby-room-name');
         button.innerText = "JOIN";
         button.classList.add('game-lobby-room-join-btn', 'game-btn', 'btn');
@@ -166,8 +166,7 @@
                 break;
         }
         sleep(1200).then(() => {
-            elements.statusText.innerText = "Your Turn!";
-            elements.statusText.style.color = "green";
+            updateStatus(playerName)
         })
     })
 

@@ -4,7 +4,7 @@
 
     using Chess.Data.Common.Models;
 
-    public class GameEntity : BaseModel<string>
+    public class GameEntity : BaseModel<string>, IBlockEntity
     {
         public string PlayerOneName { get; set; }
 

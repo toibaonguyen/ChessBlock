@@ -1,0 +1,518 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_gameID",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_playerOneName",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_playerOneUserId",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_playerTwoName",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_playerTwoUserId",
+        "type": "string"
+      }
+    ],
+    "name": "createGame",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_moveID",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_userId",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_gameId",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_notation",
+        "type": "string"
+      }
+    ],
+    "name": "createMove",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_statisticID",
+        "type": "uint256"
+      },
+      {
+        "internalType": "int256",
+        "name": "_played",
+        "type": "int256"
+      },
+      {
+        "internalType": "int256",
+        "name": "_won",
+        "type": "int256"
+      },
+      {
+        "internalType": "int256",
+        "name": "_drawn",
+        "type": "int256"
+      },
+      {
+        "internalType": "int256",
+        "name": "_lost",
+        "type": "int256"
+      },
+      {
+        "internalType": "int256",
+        "name": "_eloRating",
+        "type": "int256"
+      },
+      {
+        "internalType": "string",
+        "name": "_userId",
+        "type": "string"
+      }
+    ],
+    "name": "createStatistic",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "id",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "playerOneName",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "playerOneUserId",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "playerTwoName",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "playerTwoUserId",
+        "type": "string"
+      }
+    ],
+    "name": "GameCreated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "userId",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "gameId",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "notation",
+        "type": "string"
+      }
+    ],
+    "name": "MoveCreated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "int256",
+        "name": "played",
+        "type": "int256"
+      },
+      {
+        "indexed": false,
+        "internalType": "int256",
+        "name": "won",
+        "type": "int256"
+      },
+      {
+        "indexed": false,
+        "internalType": "int256",
+        "name": "drawn",
+        "type": "int256"
+      },
+      {
+        "indexed": false,
+        "internalType": "int256",
+        "name": "lost",
+        "type": "int256"
+      },
+      {
+        "indexed": false,
+        "internalType": "int256",
+        "name": "eloRating",
+        "type": "int256"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "userId",
+        "type": "string"
+      }
+    ],
+    "name": "StatisticCreated",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_id",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_playerOneName",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_playerOneUserId",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_playerTwoName",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_playerTwoUserId",
+        "type": "string"
+      }
+    ],
+    "name": "updateGame",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_id",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_userId",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_gameId",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_notation",
+        "type": "string"
+      }
+    ],
+    "name": "updateMove",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_id",
+        "type": "uint256"
+      },
+      {
+        "internalType": "int256",
+        "name": "_played",
+        "type": "int256"
+      },
+      {
+        "internalType": "int256",
+        "name": "_won",
+        "type": "int256"
+      },
+      {
+        "internalType": "int256",
+        "name": "_drawn",
+        "type": "int256"
+      },
+      {
+        "internalType": "int256",
+        "name": "_lost",
+        "type": "int256"
+      },
+      {
+        "internalType": "int256",
+        "name": "_eloRating",
+        "type": "int256"
+      },
+      {
+        "internalType": "string",
+        "name": "_userId",
+        "type": "string"
+      }
+    ],
+    "name": "updateStatistic",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "gameCount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "name": "games",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "id",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "playerOneName",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "playerOneUserId",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "playerTwoName",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "playerTwoUserId",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "createdOn",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "modifiedOn",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "moveCount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "moves",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "userId",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "gameId",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "notation",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "createdOn",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "modifiedOn",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "statisticCount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "statistics",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "internalType": "int256",
+        "name": "played",
+        "type": "int256"
+      },
+      {
+        "internalType": "int256",
+        "name": "won",
+        "type": "int256"
+      },
+      {
+        "internalType": "int256",
+        "name": "drawn",
+        "type": "int256"
+      },
+      {
+        "internalType": "int256",
+        "name": "lost",
+        "type": "int256"
+      },
+      {
+        "internalType": "int256",
+        "name": "eloRating",
+        "type": "int256"
+      },
+      {
+        "internalType": "string",
+        "name": "userId",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "createdOn",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "modifiedOn",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]

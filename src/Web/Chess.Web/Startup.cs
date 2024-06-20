@@ -54,8 +54,6 @@
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
-            //For test only:
-            //AutoMapperConfig.RegisterMappings(typeof(sta).GetTypeInfo().Assembly);
 
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {
@@ -63,8 +61,6 @@
 
                 if (env.IsDevelopment())
                 {
-                    // dbContext.Database.EnsureDeleted();
-                    // dbContext.Database.EnsureCreated();
                     dbContext.Database.Migrate();
                 }
 
@@ -82,7 +78,7 @@
                 app.UseHsts();
             }
 
-            //app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
@@ -121,6 +117,7 @@
                             {
                                 options.CheckConsentNeeded = context => true;
                                 options.MinimumSameSitePolicy = SameSiteMode.None;
+                                
                             });
         }
 
@@ -147,6 +144,7 @@
         {
             services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
+            services.AddScoped(typeof(IBlockchainRepository<>), typeof(BlockchainRepository<>));
         }
 
         private void AddServices(IServiceCollection services)

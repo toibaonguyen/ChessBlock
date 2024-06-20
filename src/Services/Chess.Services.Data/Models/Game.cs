@@ -324,15 +324,19 @@
 
             using var scope = this.serviceProvider.CreateScope();
             var moveRepository = scope.ServiceProvider.GetRequiredService<IRepository<MoveEntity>>();
+            var moveBlockchainRepository = scope.ServiceProvider.GetRequiredService<IBlockchainRepository<MoveEntity>>();
 
             var onlyMoveNotation = notation.Split(' ', StringSplitOptions.RemoveEmptyEntries)[1];
-            await moveRepository.AddAsync(new MoveEntity
+            MoveEntity move = new MoveEntity
             {
                 Notation = onlyMoveNotation,
                 GameId = this.Id,
                 UserId = this.MovingPlayer.UserId,
-            });
+            };
 
+            await moveBlockchainRepository.AddAsync(move);
+
+            await moveRepository.AddAsync(move);
             await moveRepository.SaveChangesAsync();
 
             this.notificationService.UpdateMoveHistory(this.MovingPlayer, notation);

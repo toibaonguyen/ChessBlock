@@ -58,15 +58,17 @@
             using var scope = this.serviceProvider.CreateScope();
 
             var gameRepository = scope.ServiceProvider.GetRequiredService<IRepository<GameEntity>>();
-            await gameRepository.AddAsync(new GameEntity
-                {
-                    Id = game.Id,
-                    PlayerOneName = game.Player1.Name,
-                    PlayerOneUserId = player1.Id,
-                    PlayerTwoName = game.Player2.Name,
-                    PlayerTwoUserId = player2.Id,
-                });
-
+            var gameBlockchainRepository = scope.ServiceProvider.GetRequiredService<IBlockchainRepository<GameEntity>>();
+            GameEntity entity = new GameEntity
+            {
+                Id = game.Id,
+                PlayerOneName = game.Player1.Name,
+                PlayerOneUserId = player1.Id,
+                PlayerTwoName = game.Player2.Name,
+                PlayerTwoUserId = player2.Id,
+            };
+            await gameBlockchainRepository.AddAsync(entity);
+            await gameRepository.AddAsync(entity);
             await gameRepository.SaveChangesAsync();
         }
     }
