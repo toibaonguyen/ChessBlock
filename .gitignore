@@ -363,3 +363,4 @@ tfplan
 .terraform*
 *.tfstate
 *.tfstate.*
+secret.txt
