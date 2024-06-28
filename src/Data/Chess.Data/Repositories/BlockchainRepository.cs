@@ -15,8 +15,8 @@ namespace Chess.Data.Repositories
         private readonly Web3 _web3;
         private readonly string _abi;
         //replace by info in secret.txt
-        private readonly string _contractAddress = "CONTRACT_ADDRESS";
-        private readonly string _privateKey = "PRIVATE_KEY";
+        private readonly string _contractAddress = "0x6a7aA9b882d50Bb7bc5Da1a244719C99f12F06a3";
+        private readonly string _privateKey = "1a0ef7687d9f1d83144d35f1a9c20289478c920d74470d22afb4cb9c851a982c";
         private readonly string _url = "https://rpc.sepolia.org";
         public BlockchainRepository()
         {
